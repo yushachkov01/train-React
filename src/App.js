@@ -11,7 +11,7 @@ function App() {
 
   return (
     <div className="App">
-      <PostItem/>
+      <PostItem post={{id:1, title: 'JavaScript', body: 'Description'}}/>
     </div>
   );
 }
