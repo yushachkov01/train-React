@@ -7,7 +7,6 @@ import PostItem from './components/PostItem';
 import PostList from './components/PostList';
 import MyButton from './components/UI/button/MyButton';
 import MyInput from './components/UI/input/MyInput'
-import {useRef} from 'react'
 
 function App() {
   const [posts, setPost] = useState([
@@ -18,27 +17,34 @@ function App() {
 
   ])
   const [title, setTitle] = useState('')
-  const bodyInputRef = useRef();
-  
+  const [body, setBody] = useState('')
+
   
   function addNewPost(e){
     e.preventDefault()
-    console.log(title);
-    console.log(bodyInputRef.current.value);
-
+    const newPost ={
+      id: Date.now(),
+      title,
+      body
+    }
+    setPost([...posts,newPost])
+    setTitle('')
+    setBody('')
   }
   return (
     <div className="App">
     <form>
     {/* Управляемый компонент */}
-      <MyInput value={title}
+      <MyInput 
+      value={title}
       onChange={e => setTitle(e.target.value)} 
       type="text"
        placeholder='Название поста'/>
       
+       {/* не управляемый компонент или не контролируемый */}
       <MyInput 
-      // не управляемый компонент или не контролируемый
-      ref={bodyInputRef}
+      value={body}
+      onChange={e => setBody(e.target.value)} 
       type="text" 
       placeholder='Описание поста'/>
       <MyButton onClick={addNewPost}>Создать пост</MyButton>
