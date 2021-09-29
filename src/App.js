@@ -7,6 +7,7 @@ import PostItem from './components/PostItem';
 import PostList from './components/PostList';
 import MyButton from './components/UI/button/MyButton';
 import MyInput from './components/UI/input/MyInput'
+import {useRef} from 'react'
 
 function App() {
   const [posts, setPost] = useState([
@@ -16,10 +17,14 @@ function App() {
 
 
   ])
-  const [title, setTitle] = useState('ew')
+  const [title, setTitle] = useState('')
+  const bodyInputRef = useRef();
+  
+  
   function addNewPost(e){
     e.preventDefault()
     console.log(title);
+    console.log(bodyInputRef.current.value);
 
   }
   return (
@@ -28,10 +33,14 @@ function App() {
     {/* Управляемый компонент */}
       <MyInput value={title}
       onChange={e => setTitle(e.target.value)} 
-            // {/* Проверяем как пользователь из этого поля что-то вводит.  Из евента в поле таргет достаем поле value и помещаем его в состояние (Т.е можем писать в инпуте что-угодно ) */}
       type="text"
        placeholder='Название поста'/>
-      <MyInput type="text" placeholder='Описание поста'/>
+      
+      <MyInput 
+      // не управляемый компонент или не контролируемый
+      ref={bodyInputRef}
+      type="text" 
+      placeholder='Описание поста'/>
       <MyButton onClick={addNewPost}>Создать пост</MyButton>
     </form>
       <PostList posts={posts} title='Список постов:'/>
