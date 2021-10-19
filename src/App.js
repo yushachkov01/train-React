@@ -28,7 +28,7 @@ function App() {
     return posts
   }
 
-  const sortedPost = getSortedPosts()
+  const sortedPost = getSortedPosts();
   
   function createPost(newPost) {
     setPosts([...posts, newPost])
